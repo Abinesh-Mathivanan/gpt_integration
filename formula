@@ -1,0 +1,17 @@
+function GPT_SIMPLIFY(input) {
+  console.log(input)
+  const systemContent = "Simplify the given text in layman's term. Remember reader is not an expert in english.";
+  return Array.isArray(input) ?
+    input.flat().map(text => fetchData(systemContent, text)) :
+    fetchData(systemContent, input);
+
+}
+
+function GPT_SUMMARY(input) {
+  console.log(input)
+  const systemContent = "Summarize the given text. Provide atleast 3 and atmost 5 bullet points.";
+  return Array.isArray(input) ?
+    input.flat().map(text => fetchData(systemContent, text)) :
+    fetchData(systemContent, input);
+
+}
