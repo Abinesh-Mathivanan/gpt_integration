@@ -1,0 +1,75 @@
+function gptSimplifyMenu() {
+  try {
+    // get sheets and data
+    const ss = SpreadsheetApp.getActiveSheet();
+    const data = ss.getDataRange().getValues();
+    const lastRow = data.length;
+    const lastCol = data[0].length;
+
+    // define gpt's role play
+    const systemContent = "Simplify the given text in layman's term. Remember reader is not an expert in english.";
+
+
+    for (let i = 1; i < data.length; i++) {
+      // only simplify if not already simplified or error occured previously
+      if (data[i][1] === "" || data[i][1] === "Some Error Occured Please check your formula or try again later.") {
+        data[i][1] = fetchData(systemContent, data[i][0]);
+        console.log(data[i][1]);
+
+      }
+    }
+
+    ss.getRange(1, 1, lastRow, lastCol).setValues(data);
+  } catch (e) {
+    console.log(e)
+    SpreadsheetApp.getActiveSpreadsheet().toast("Some Error Occured Please check your formula or try again later.");
+
+  }
+}
+
+function createCustomMenu() {
+   // define menu ui 
+  let menu = SpreadsheetApp.getUi().createMenu("GPT Functions");
+   // add function to the menu
+   menu.addItem("GPT SIMPLIFY", "gptSimplifyMenu");
+   // add menu to the spreadsheet ui
+  menu.addToUi();
+}
+
+/**
+ * OnOpen trigger that creates menu
+ * @param {Dictionary} e
+ */
+function onOpen(e) {
+  createCustomMenu();
+}
+
+function gptSummaryMenu() {
+  try {
+    // get sheets and data
+    const ss = SpreadsheetApp.getActiveSheet();
+    const data = ss.getDataRange().getValues();
+    const lastRow = data.length;
+    const lastCol = data[0].length;
+
+    // define gpt's role play
+    const systemContent = "Summarize the given text. Provide atleast 3 and atmost 5 bullet points.";
+
+
+    for (let i = 0; i < data.length; i++) {
+      console.log(`Inside gptSummaryMenu() for loop`)
+
+      if (i == 0) continue;
+      // only summarize if not already summarized or error occured previously
+      if (data[i][2] === "" || data[i][2] === "Some Error Occured Please check your formula or try again later.") {
+        data[i][2] = fetchData(systemContent, data[i][0]);
+        console.log(data[i][2]);
+      }
+    }
+
+    ss.getRange(1, 1, lastRow, lastCol).setValues(data);
+  } catch (e) {
+    console.log(e)
+    SpreadsheetApp.getActiveSpreadsheet().toast("Some Error Occured Please check your formula or try again later.");
+  }
+}
