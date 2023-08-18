@@ -36,7 +36,7 @@ If you encounter any variations in your data structure or usage, remember to tai
 
 Step 5:
 
-he function is now prepared for testing, but in order to make it visible within the spreadsheet, we'll need to provide the following guidelines. These instructions are meant to be implemented within the createCustomMenu() function:
+The function is now prepared for testing, but in order to make it visible within the spreadsheet, we'll need to provide the following guidelines. These instructions are meant to be implemented within the createCustomMenu() function:
 
 To establish the menu, begin by defining it as follows: SpreadsheetApp.getUi().createMenu("GPT Functions"). This sets "GPT Functions" as the title that will appear in the spreadsheet tab.
 
@@ -46,7 +46,6 @@ Finally, add the newly created menu to the user interface using menu.addToUi().
 
 The "onOpen" trigger executes automatically whenever the script-attached document is reloaded. As a result, it adds the menu to the spreadsheet, visible as depicted in the accompanying image.
 
-Step 6:
 
 
 
