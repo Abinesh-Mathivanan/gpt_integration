@@ -1,52 +1,55 @@
-# gpt_integration
+# Google Sheets Integration with ChatGPT
 
-You could fetch ChatGPT responses directly to the Google Sheets with the help of OpenAI API
+This project demonstrates how to integrate ChatGPT responses directly into Google Sheets using the OpenAI API and Google Apps Script.
 
-Step 1:
+## Overview
 
-To begin, if you're not already registered with OpenAI, you should sign up for an account. Once you have an account, navigate to the API keys section located in the User tab.
-Click on the button labeled "Create new secret key," and once it's generated, make sure to copy the key. Remember that this API key won't be visible again, so ensure you save it in a secure location.
+The goal of this project is to fetch ChatGPT responses and populate a Google Sheets spreadsheet with the simplified text. The integration is achieved through Google Apps Script and the OpenAI API.
 
-Step 2:
+## Prerequisites
 
-Let's begin by accessing the app script associated with your spreadsheet. Rename the script to "GPT_integration". Additionally, rename the current file to "utils.gs". Within the "GPT_integration" script, establish a new function named "fetchData".
+- Google Account
+- OpenAI API Key (Sign up for OpenAI and generate a secret key)
+- Access to Google Sheets
 
-Step 3:
+## Getting Started
 
-Next, let's proceed with setting up the custom formula. Start by creating a new file named "formula". Within this file, you'll establish a function called "GPT_SIMPLIFY".
+1. Clone this repository:
+   ```
+   git clone https://github.com//gpt_integration.git
+   cd gpt_integration
+   ```
 
-The purpose of the "GPT_SIMPLIFY" formula is to simplify any given text input. The input data is retrieved from the spreadsheet. This function automatically receives data when you select a cell, a range of cells, or multiple cells in the spreadsheet.
+2. Set up your OpenAI API Key:
+   - Sign up for OpenAI and generate an API key.
+   - Copy the API key and keep it secure.
 
-The "systemContent" is defined as the first parameter passed to the "fetchData(systemContent, userContent)" function.
+3. Set up Google Apps Script:
+   - Open your Google Sheets document.
+   - Go to Extensions > Apps Script to open the script editor.
+   - Rename the project to "GPT Integration" and replace the default code with the code provided in this repository.
 
-It's important to check whether the input is an Array. This step is necessary because the data provided to this function can either be a nested array or a simple string, depending on whether you've selected multiple cells or a single cell in the spreadsheet.
+4. Create a custom formula:
+   - Create a new file named "formula" within the script editor.
+   - Define the "GPT_SIMPLIFY" formula to simplify text using ChatGPT API.
 
+5. Add a custom menu to the spreadsheet:
+   - Create a new file named "menu" within the script editor.
+   - Define the "gptSimplifyMenu" function and add the custom menu to the user interface.
 
-Step 4:
+6. Test the functionality:
+   - Reload the Google Sheets document.
+   - The custom menu "GPT Functions" should appear. Use the "GPT SIMPLIFY" option to fetch and display simplified text.
 
-To proceed, let's create a new file named "menu". Within this file, we'll establish the function "gptSimplifyMenu." This function will serve as an alternative to the "GPT_SIMPLIFY" formula.
+## Usage
 
-Take note of these specific aspects in the code:
+1. Select the cell containing the text you want to simplify.
+2. Use the custom menu option "GPT SIMPLIFY" to populate adjacent cells with simplified text.
 
-Data sources are hardcoded using expressions like data[i][1]. This references the second column ("Simplified Passage") as depicted in the spreadsheet image above. In case you're utilizing different columns for storing data from ChatGPT, you'll need to adjust these expressions accordingly.
+## License
 
-Data retrieval occurs only when the target cell is either empty or contains an error message. This approach is employed to prevent unnecessary API calls, optimizing the process.
-
-If you encounter any variations in your data structure or usage, remember to tailor the code according to your specific requirements.
-
-Step 5:
-
-The function is now prepared for testing, but in order to make it visible within the spreadsheet, we'll need to provide the following guidelines. These instructions are meant to be implemented within the createCustomMenu() function:
-
-To establish the menu, begin by defining it as follows: SpreadsheetApp.getUi().createMenu("GPT Functions"). This sets "GPT Functions" as the title that will appear in the spreadsheet tab.
-
-Incorporate a function into the menu using menu.addItem("GPT SIMPLIFY", "gptSimplifyMenu"). In this line, the first parameter signifies the display title, while the second parameter specifies the function to be executed upon pressing.
-
-Finally, add the newly created menu to the user interface using menu.addToUi().
-
-The "onOpen" trigger executes automatically whenever the script-attached document is reloaded. As a result, it adds the menu to the spreadsheet, visible as depicted in the accompanying image.
-
-
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
 
 
 
